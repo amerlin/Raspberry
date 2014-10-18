@@ -83,8 +83,7 @@
 		  <tr><td>Sensore</td><td>5 Megapixel 1080p / 720p / 640x480p Video </td></tr>
 		  </table>
 	  </li>
-	  <li><b>Sensore di temperatura</b> basato su integrato DS18B20. Il sensore DS18B20 è una una sonda in grado di rilevare una temperatura compresa nel campo -55°C÷125°C con un’accuratezza di ±0.5°C nel campo -10°C÷85°C .
-		  <br/><img src="img/sonda.png"/><br/><br/>
+	  <li><b>Sensore di temperatura</b> basato su integrato DS18B20. Il sensore DS18B20 è una una sonda in grado di rilevare una temperatura compresa nel campo -55°C÷125°C con un’accuratezza di ±0.5°C nel campo -10°C÷85°C .<br/><img src="img/sonda.png"/><br/><br/>
 	  </li>
 	  <li><b>Adattatore Wi-fi Usb</b>: utilizzata per poter accedere al rasberry direttamente senza utilizzare il cavo ethernet.
 		  <br/><br/><img src="img/wifi.png"></br></br>

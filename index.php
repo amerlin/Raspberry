@@ -3,6 +3,42 @@
 <?php
   define('BASE_DIR', dirname(__FILE__));
   require_once(BASE_DIR.'/config.php');
+  
+  //Ottiene la temperatura
+  		$dbhost = 'localhost:3036';
+		$dbuser = 'keantexc_cw';
+		$dbpass = 'Tg3oQ0LSMZpO';
+		$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+		if(! $conn )
+		{
+		  die('Could not connect: ' . mysql_error());
+		}
+		
+		$datarilievo = "";
+		//$sql = "select top 1 * from  temperatura order by tm_id desc";
+		$sql = "select tm_temperatura,tm_data from temperatura order by tm_id desc limit 1";
+				
+		mysql_select_db('keantexc_casellaw');
+		$retval = mysql_query( $sql, $conn );
+		if(! $retval )
+		{
+		  die('Could not retrieve data: ' . mysql_error());
+		}
+
+		$temperatura = "";
+		while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+		{
+			$temperatura = $row['tm_temperatura'];
+			$datarilievo = $row['tm_data'];
+		} 
+  
+		$separatore = " ";
+		$giornorilievo = explode($separatore, $datarilievo);
+		$tmp1 = explode("-",$giornorilievo[0]);
+		$orarilievo = $giornorilievo[1];
+		$datarilievo = $tmp1[2]."-".$tmp1[1]."-".$tmp1[0] . " " .$orarilievo;
+		
+  
 ?>
   <head>
     <meta charset="utf-8">
@@ -60,16 +96,16 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Casella Wireless - Camera1</h1>
+        <h1>Casella Wireless Camera1</h1>
       </div>
 	<center>
 	<div class="alert alert-success" role="alert">Posizionata a Cabella Ligure (AL) - fraz. Casellla</div>
 	<div></div>
 	
-	<div><img src="img/current.jpg"></div>
+	<div><img src="imgftp/now.jpg" class="img-responsive"></div>
 
 	<div><br/></div>
-	<div class="alert alert-success" role="alert">Temperatura Attuale: 33&deg; C</div>	
+	<div class="alert alert-success" role="alert">Temperatura Esterna: <strong><?php print($temperatura);?>&deg; C</strong> rilevata il <?php print($datarilievo);?></div>	
 	<div class="alert alert-success" role="alert">Altezza : 510m s.l.m. - Latitudine: 44°40'28"92 N - Longitudine: 09°5'48"48 E </div>
     
 	</center></div><!-- /.container -->

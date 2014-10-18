@@ -62,8 +62,53 @@
 
    <div><br/></div>       
    <div class="alert alert-info" role="alert">Storico temperatura</div>
+   
+   	<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID Temperatura</th>
+      <th>Gradi rilevati</th>
+      <th>Data/Ora Rilievo</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+   	<?php
+		$dbhost = 'localhost:3036';
+		$dbuser = 'keantexc_cw';
+		$dbpass = 'Tg3oQ0LSMZpO';
+		$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+		if(! $conn )
+		{
+		  die('Could not connect: ' . mysql_error());
+		}
+		$sql = 'SELECT tm_id, tm_temperatura , tm_data from temperatura order by tm_id desc LIMIT 10';
+		
+		mysql_select_db('keantexc_casellaw');
+		$retval = mysql_query( $sql, $conn );
+		if(! $retval )
+		{
+		  die('Could not get data: ' . mysql_error());
+		}
+		while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
+		{
+		    	 //echo "TEMP ID :{$row['tm_id']}  <br> ".
+		         //"TEMP TEMPERATURA : {$row['tm_temperatura']} <br> ".
+		         //"TEMP DATA : {$row['tm_data']} <br> ".
+		         //"--------------------------------<br>";
+		         print("<tr>");
+		         print("<td>".$row['tm_id']."</td><td>".$row['tm_temperatura']."</td><td>".$row['tm_data']."</td>");
+		         print("</tr>");
+		         
+		} 
+		//echo "Fetched data successfully\n";
+		mysql_close($conn);
+	?>
+     </tbody>
+</table>
+   
      
-    </div><!-- /.container -->
+   </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
