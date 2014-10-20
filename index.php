@@ -4,7 +4,41 @@
   define('BASE_DIR', dirname(__FILE__));
   require_once(BASE_DIR.'/config.php');
   
-  //Ottiene la temperatura
+  		//Ottiene data ultima immagine
+  		$nomefile="";
+		
+		//path to directory to scan
+		$directory = "/home/keantexc/public_html/meteo/imgftp/";
+		
+		//get all image files with a .txt extension.
+		$file= glob($directory . "*.data");
+		
+		//print each file name
+		foreach($file as $filew)
+		{
+		$nomefile = $filew;
+		$files[] = $filew; // to create the array
+		}
+		
+		if(count($files)!=0)
+		{
+			$file = fopen($nomefile, "r");
+			$i=0;
+			while(!feof($file)){
+			    
+			    $line = fgets($file);
+				
+				if($i==0)
+					$imgdt = $line;
+				if($i==1)
+					$imgora = $line;
+				$i=$i+1;
+			}
+			fclose($file);			
+		}
+  		
+  
+ 		//Ottiene la temperatura da mysql
   		$dbhost = 'localhost:3036';
 		$dbuser = 'keantexc_cw';
 		$dbpass = 'Tg3oQ0LSMZpO';
@@ -38,7 +72,9 @@
 		$orarilievo = $giornorilievo[1];
 		$datarilievo = $tmp1[2]."-".$tmp1[1]."-".$tmp1[0] . " " .$orarilievo;
 		
-  
+		$tmp2 = explode("-", $imgdt);
+		$imgdt = $tmp2[2]."-".$tmp2[1]."-".$tmp2[0]. " ".$imgora;
+		
 ?>
   <head>
     <meta charset="utf-8">
@@ -96,15 +132,16 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Casella Wireless Camera1</h1>
+        <h3>Camera1</h3>
       </div>
 	<center>
-	<div class="alert alert-success" role="alert">Posizionata a Cabella Ligure (AL) - fraz. Casellla</div>
+	<div class="alert alert-success" role="alert">Posizionata a Cabella Ligure (AL) - fraz. Casella</div>
 	<div></div>
 	
 	<div><img src="imgftp/now.jpg" class="img-responsive"></div>
 
 	<div><br/></div>
+	<div class="alert alert-success" role="alert">Ultimo aggiornamenento immagine: <strong><?php print($imgdt);?></strong></div>
 	<div class="alert alert-success" role="alert">Temperatura Esterna: <strong><?php print($temperatura);?>&deg; C</strong> rilevata il <?php print($datarilievo);?></div>	
 	<div class="alert alert-success" role="alert">Altezza : 510m s.l.m. - Latitudine: 44°40'28"92 N - Longitudine: 09°5'48"48 E </div>
     

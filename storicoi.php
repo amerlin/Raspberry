@@ -60,9 +60,63 @@
     <div class="container">
 
 	   <div><br/></div>
-       <div class="alert alert-info" role="alert">Storico immagini</div>
+       <div class="alert alert-info" role="alert">Storico immagini (sono visualizzate solo le immagini della giornata)</div>
      
-     
+	   <?php
+	   
+	   		//Data Attuale
+	   		$today = date('Y-m-j');
+
+			$folder = 'imgftp/';
+			$filetype = $today.'*.jpg';
+			
+			$files = glob($folder.$filetype);
+			$count = count($files);
+			 
+			$sortedArray = array();
+			for ($i = 0; $i < $count; $i++) {
+			    $sortedArray[date ('YmdHis', filemtime($files[$i]))] = $files[$i];
+			}
+			 
+			krsort($sortedArray);
+	   ?>
+	     
+	    <div class="bs-example">
+	    <php $i=0;?>
+		<?php foreach ($sortedArray as &$filename) {?>
+		<?php if($i==3 || $i==0) {?>
+		<div class="row">
+		<?php }?>
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="<?php print($filename); ?>">
+					<div class="caption">
+						<h4>Data Scatto:</h4>
+						<p><?php 
+							$prova = str_replace($folder, "",$filename);
+							$tmp = explode("_", $prova);
+							$data = $tmp[0];
+							
+							//Reverse della data
+							$tmp2 = explode("-",$data);
+							$datascatto = $tmp2[2]."-".$tmp2[1]."-".$tmp2[0];
+							
+							$ora = $tmp[1];
+							$tmp3 = substr($ora,0,2);
+							$tmp4 = substr($ora,2,2);
+							
+							print($datascatto. " ".$tmp3.":".$tmp4);
+							?>
+							</p>
+						<p></p>
+					</div>
+				</div>
+			</div>		
+			<?php }?>
+		</div>
+
+
+	</div>
 	     
      
     </div><!-- /.container -->
