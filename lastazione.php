@@ -88,10 +88,11 @@
 	  <li><b>Adattatore Wi-fi Usb</b>: utilizzata per poter accedere al rasberry direttamente senza utilizzare il cavo ethernet.
 		  <br/><br/><img src="img/wifi.png"></br></br>
 	  </li>
-	  <li><b>Scatola elettrica stagna</b>: per ospitare tutta la cicuiteria.</li>
+	  <li><b>Scatola elettrica stagna</b>: per ospitare tutta la circuiteria.</li>
 	  <br><img src="img/scatola.png"/><br></br>
-	  <li><b>Script realizzato in Pyton per l'acquisizione dei dati dalla sonda della temperatura.</b></li>
+	  <li><b>Script realizzato in Bash per l'acquisizione dei dati dalla sonda della temperatura.</b></li>
 	  <li><b>Script realizzato in Bash per l'acquisizione delle immagini dalla fotocamera.</b></li>
+	  <li><b>Website in php (json, google chart api)</b></li>
   </div>
 </div>
 		     

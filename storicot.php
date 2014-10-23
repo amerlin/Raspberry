@@ -61,7 +61,7 @@
     <div class="container">
 
    <div><br/></div>       
-   <div class="alert alert-info" role="alert">Storico temperatura</div>
+   <div class="alert alert-info" role="alert">Storico giornaliero della temperatura</div>
    
    	<table class="table table-striped">
   <thead>
@@ -92,9 +92,6 @@
 		}
 		while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
 		{
-		    	 //echo "TEMP ID :{$row['tm_id']}  <br> ".
-		         //"TEMP TEMPERATURA : {$row['tm_temperatura']} <br> ".
-		         //"TEMP DATA : {$row['tm_data']} <br> ".
 		         //"--------------------------------<br>";
 		         print("<tr>");
 		         print("<td>".$row['tm_id']."</td><td>".$row['tm_temperatura']."</td><td>".$row['tm_data']."</td>");
@@ -106,8 +103,10 @@
 	?>
      </tbody>
 </table>
-   
-     
+
+<div class="alert alert-info" role="alert">
+ <strong><a href="grafico.php">Visualizza il grafico complessivo della temperatura</a></strong>
+</div>     
    </div><!-- /.container -->
 
 
